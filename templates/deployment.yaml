@@ -71,6 +71,13 @@ spec:
             {{- end }}
             - name: ALLOW_EMPTY_PASSWORD
               value: {{ ternary "yes" "no" .Values.allowEmptyPassword | quote }}
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "wordpress.databaseSecretName" . }}
+                  key: mariadb-password
             - name: MYSQL_HOST
               value: {{ include "wordpress.databaseHost" . | quote }}
             - name: MYSQL_PORT_NUMBER
