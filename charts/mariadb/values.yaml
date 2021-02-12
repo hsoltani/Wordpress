@@ -142,6 +142,7 @@ rootUser:
   # injectSecretsFile: "/vault/secrets/root-password"
 
 ## Custom user/db credentials
+MYSQL_ALLOW_EMPTY_PASSWORD: true
 ##
 db:
   ## MariaDB username and password
