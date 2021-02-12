@@ -104,6 +104,11 @@ spec:
           image: {{ template "mariadb.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mariadb.secretName" . }}
+                  key: mariadb-root-password 
             {{- if .Values.image.debug}}
             - name: BITNAMI_DEBUG
               value: "true"
